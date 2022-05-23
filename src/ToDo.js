@@ -21,14 +21,19 @@ class ToDo extends Component {
   // Method that add new task to the list
   handleAddTask = (event) => {
     const { inputTask, tasksToDo } = this.state;
-    const data = {
-      title: inputTask,
-      done: false,
-    };
-    this.setState({
-      tasksToDo: [...tasksToDo, data],
-      inputTask: this.initialInputTask,
-    });
+    if (inputTask === "") {
+      alert("Cannot create empty tasks");
+    } else {
+      const data = {
+        title: inputTask,
+        done: false,
+      };
+      this.setState({
+        tasksToDo: [...tasksToDo, data],
+        inputTask: this.initialInputTask,
+      });
+    }
+
     event.preventDefault();
   };
 
@@ -56,21 +61,23 @@ class ToDo extends Component {
   render() {
     const { inputTask, tasksToDo } = this.state;
     return (
-      <div>
-        <Form
-          handleChange={this.handleChange}
-          handleAddTask={this.handleAddTask}
-          value={inputTask}
-        />
-        <ItemsList
-          tasksToDo={tasksToDo}
-          handleCheckTask={this.handleCheckTask}
-          handleDeleteTask={this.handleDeleteTask}
-        />
-        <DoneItems
-          tasksToDo={tasksToDo}
-          handleCheckTask={this.handleCheckTask}
-        />
+      <div className="bg-teal-800 drop-shadow-lg w-full min-h-screen px-5 py-20 flex flex-col items-center ">
+        <main className="container max-w-xl bg-slate-300 p-8 rounded-xl">
+          <Form
+            handleChange={this.handleChange}
+            handleAddTask={this.handleAddTask}
+            value={inputTask}
+          />
+          <ItemsList
+            tasksToDo={tasksToDo}
+            handleCheckTask={this.handleCheckTask}
+            handleDeleteTask={this.handleDeleteTask}
+          />
+          <DoneItems
+            tasksToDo={tasksToDo}
+            handleCheckTask={this.handleCheckTask}
+          />
+        </main>
       </div>
     );
   }
