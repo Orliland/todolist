@@ -69,7 +69,7 @@ class ToDo extends Component {
         />
         <DoneItems
           tasksToDo={tasksToDo}
-          handleUnCheckTask={this.handleCheckTask}
+          handleCheckTask={this.handleCheckTask}
         />
       </div>
     );
